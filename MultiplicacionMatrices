@@ -1,0 +1,90 @@
+# Por: Miguel Mercado
+
+# 1. Llenarla de ceros.
+# 2. Llenar la matriz completa.
+
+filas1 = int(input("Ingrese el número de filas de la primera matriz: "))
+columnas1 = int(input("Ingrese el número de columnas de la primera matriz: "))
+filas2 = int(input("Ingrese el número de filas de la segunda matriz: "))
+columnas2 = int(input("Ingrese el número de columnas de la segunda matriz: "))
+
+# Crear las matrices vacías
+matriz1 = [[0 for _ in range(columnas1)] for _ in range(filas1)]
+matriz2 = [[0 for _ in range(columnas2)] for _ in range(filas2)]
+
+# Pedir al usuario asignar los valores de las matrices
+for i in range(filas1):
+    for j in range(columnas1):
+        matriz1[i][j] = int(input(f"Ingrese el valor para la posición ({i+1},{j+1}) de la primera matriz: "))
+
+for i in range(filas2):
+    for j in range(columnas2):
+        matriz2[i][j] = int(input(f"Ingrese el valor para la posición ({i+1},{j+1}) de la segunda matriz: "))
+
+# Se imprimen las maatrices de manera visual
+print("Matriz 1:")
+for fila in matriz1:
+    print(fila)
+
+print("Matriz 2:")
+for fila in matriz2:
+    print(fila)
+
+# Se realiza una multiplicació de matrices
+if columnas1 == filas2:
+    # Matriz llena de ceros con el mismo tamaño de la matriz resultante
+    resultado1 = [[0 for _ in range(columnas2)] for _ in range(filas1)]
+    for i in range(filas1):
+        for j in range(columnas2):
+            resultado1[i][j] = 0  
+              
+    print("Primero mostramos la matriz llena de ceros")
+    for fila in resultado1:
+        print(fila)
+
+    # Matriz encargada de la multiplicación
+    resultado3 = [[0 for _ in range(columnas2)] for _ in range(filas1)]
+    for i in range(filas1):
+        for j in range(columnas2):
+            for k in range(columnas1):
+                resultado3[i][j] += matriz1[i][k] * matriz2[k][j]
+
+    print("El resultado de la multiplicación de matrices es:")
+    for fila in resultado3:
+        print(fila)
+
+# En el caso que no se puedan multiplicar las matrices porque las columnas de la primera matriz no son iguales a las filas de la segunda matriz, se igualan a la fuerza haciendo que tengan el mismo tamaño, esos espacios se rellenan con ceros.
+else:
+    # Matrices de ceros para igualar las dimensiones
+    matriz1_ajustada = [[0 for _ in range(columnas2)] for _ in range(filas1)]
+    matriz2_ajustada = [[0 for _ in range(columnas2)] for _ in range(filas2)]
+
+    # Copiar valores originales de la matriz1 a la matriz1 ajustada
+    for i in range(filas1):
+        for j in range(columnas1):
+            if j < columnas2:  # Verificar que el índice sea válido
+                matriz1_ajustada[i][j] = matriz1[i][j]
+
+    # Copiar valores originales de la matriz2 a la matriz2 ajustada
+    for i in range(filas2):
+        for j in range(columnas2):
+            if i < filas1:  # Verificar que el índice sea válido
+                matriz2_ajustada[i][j] = matriz2[i][j]
+
+    # Matriz resultante de la multiplicación
+    resultado = [[0 for _ in range(columnas2)] for _ in range(filas1)]
+    for i in range(filas1):
+        for j in range(columnas2):
+            for k in range(filas2):
+                resultado[i][j] += matriz1_ajustada[i][k] * matriz2_ajustada[k][j]
+
+    print("Las matrices se han ajustado para multiplicarse:")
+    for fila in resultado:
+        print(fila)
+
+
+
+
+
+
+
